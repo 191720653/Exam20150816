@@ -1,4 +1,4 @@
-package com.hand.dao.impl;
+﻿package com.hand.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,7 +65,7 @@ public class FilmDaoImpl implements FilmDao {
 			preparedStatement = connection.prepareCall(sql);
 			preparedStatement.setInt(1, film.getId());
 			preparedStatement.execute();
-			sql = "delete from rental where inventory_id=(select inventory_id from inventory where film_id=? limit 1)";
+			sql = "delete from rental where inventory_id in(select inventory_id from inventory where film_id=?)";
 			preparedStatement = connection.prepareCall(sql);
 			preparedStatement.setInt(1, film.getId());
 			preparedStatement.execute();
